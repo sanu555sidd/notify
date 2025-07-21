@@ -1,4 +1,9 @@
 {
+  
+    "engines":{
+      "node": "22.17.1"
+    },
+  
   "name": "server",
   "version": "1.0.0",
   "main": "server.js",
