@@ -15,6 +15,11 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
+// 👇 Add this route to fix "Cannot GET /"
+app.get("/", (req, res) => {
+  res.send("📝 Notify Backend API is live");
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/notes', noteRoutes);
 app.use('/api/translate', translateRoutes);
