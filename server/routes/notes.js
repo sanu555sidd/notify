@@ -5,12 +5,29 @@ const auth = require('../middleware/auth');
 
 router.post('/', auth, async (req, res) => {
   const { title, content, category } = req.body;
+  
+  // Validate required fields - check for empty strings and undefined/null
+  if (!title || title.trim() === '' || !content || content.trim() === '' || !category || category.trim() === '') {
+    return res.status(400).json({ 
+      message: 'All fields (title, content, category) are required and cannot be empty' 
+    });
+  }
+
   try {
-    const note = new Note({ title, content, category, userId: req.user.id });
+    const note = new Note({ 
+      title: title.trim(), 
+      content: content.trim(), 
+      category: category.trim(), 
+      userId: req.user.id 
+    });
     await note.save();
     res.json(note);
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    console.error('Note creation error:', error);
+    res.status(500).json({ 
+      message: 'Failed to create note',
+      error: error.message 
+    });
   }
 });
 

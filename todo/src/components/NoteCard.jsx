@@ -12,7 +12,7 @@ function NoteCard({ note, onUpdate, onDelete }) {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
       const res = await axios.put(`/api/notes/${note._id}`, 
         { title, content, category },
         { headers: { Authorization: `Bearer ${token}` } }
@@ -29,7 +29,7 @@ function NoteCard({ note, onUpdate, onDelete }) {
     if (!confirmed) return;
 
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
       await axios.delete(`/api/notes/${note._id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -37,6 +37,12 @@ function NoteCard({ note, onUpdate, onDelete }) {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleShare = () => {
+    const message = `**Note Title:** ${note.title}\n**Category:** ${note.category}\n**Content:** ${note.content}\n*Shared via Note Zipper*`;
+    const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(message)}`;
+    window.location.href = whatsappUrl;
   };
 
   return (
@@ -58,6 +64,12 @@ function NoteCard({ note, onUpdate, onDelete }) {
             className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition duration-200"
           >
             Delete
+          </button>
+          <button
+            onClick={(e) => { e.stopPropagation(); handleShare(); }}
+            className="bg-green-500 text-white py-1 px-3 rounded hover:bg-green-600 transition duration-200"
+          >
+            Share
           </button>
         </div>
       </div>
