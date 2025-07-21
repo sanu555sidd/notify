@@ -22,9 +22,10 @@
 4. **Configure the service:**
    - **Name**: `notify-backend`
    - **Environment**: `Node`
-   - **Build Command**: `npm install`
+   - **Build Command**: `./render-build.sh` or `npm install`
    - **Start Command**: `npm start`
    - **Root Directory**: `server`
+   - **Node Version**: `18.20.4` (specify in Advanced settings)
 
 5. **Set Environment Variables:**
    ```
@@ -35,6 +36,18 @@
    ```
 
 6. **Deploy the service**
+
+## Common Deployment Fixes
+
+### If you get "Missing parameter name" error:
+1. **The Express.js version has been downgraded to 4.x for compatibility**
+2. **Clear build cache and redeploy**
+3. **Make sure Node.js version is set to 18.x**
+
+### If build fails:
+1. **Check that `render-build.sh` has execute permissions**
+2. **Try using `npm install` as build command instead**
+3. **Verify all dependencies are in package.json**
 
 ## Step 3: Deploy Frontend on Render
 

@@ -3,17 +3,34 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-const authRoutes = require('./routes/auth');
-const noteRoutes = require('./routes/notes');
-const translateRoutes = require('./routes/translate');
 
 const app = express();
 
+// Import routes
+const authRoutes = require('./routes/auth');
+const noteRoutes = require('./routes/notes');
+const translateRoutes = require('./routes/translate');
+const testRoutes = require('./routes/test');
+
 // CORS configuration for production
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' 
-    ? [process.env.FRONTEND_URL, 'https://your-frontend-app.onrender.com'] 
-    : ['http://localhost:5173', 'http://localhost:5174'],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      'http://localhost:5173',
+      'http://localhost:5174',
+      'http://localhost:3000',
+      process.env.FRONTEND_URL
+    ].filter(Boolean);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(null, true); // Allow all origins for now, restrict later
+    }
+  },
   credentials: true,
   optionsSuccessStatus: 200
 };
@@ -22,10 +39,18 @@ app.use(cors(corsOptions));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Remove deprecated options for newer MongoDB driver
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log('MongoDB connection error:', err));
+// Connect to MongoDB
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log('MongoDB connected successfully');
+  } catch (error) {
+    console.error('MongoDB connection error:', error.message);
+    process.exit(1);
+  }
+};
+
+connectDB();
 
 // Health check route
 app.get("/", (req, res) => {
@@ -38,6 +63,7 @@ app.get("/", (req, res) => {
 });
 
 // API Routes
+app.use('/api/test', testRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/notes', noteRoutes);
 app.use('/api/translate', translateRoutes);
