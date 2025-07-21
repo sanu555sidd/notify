@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config/api';
 
 function NoteForm({ onNoteCreated }) {
   const [title, setTitle] = useState('');
@@ -40,10 +41,33 @@ function NoteForm({ onNoteCreated }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Debug: Check the values before sending
+    console.log('Form data:', { title, content, category });
+    
+    // Validate on frontend too
+    if (!title.trim() || !content.trim() || !category.trim()) {
+      setError('All fields are required and cannot be empty.');
+      return;
+    }
+    
     try {
       const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-      const res = await axios.post('/api/notes', { title, content, category }, {
-        headers: { Authorization: `Bearer ${token}` }
+      
+      if (!token) {
+        setError('No authentication token found. Please log in again.');
+        return;
+      }
+
+      const res = await axios.post(`${API_BASE_URL}/notes`, { 
+        title: title.trim(), 
+        content: content.trim(), 
+        category: category.trim() 
+      }, {
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
       });
       onNoteCreated(res.data);
       setTitle('');
@@ -51,8 +75,16 @@ function NoteForm({ onNoteCreated }) {
       setCategory('');
       setError('');
     } catch (error) {
-      setError('Failed to create note. Please try again.');
-      console.error(error);
+      console.error('Note creation error:', error);
+      if (error.response?.status === 401) {
+        setError('Authentication failed. Please log in again.');
+      } else if (error.response?.status === 400) {
+        setError(error.response?.data?.message || 'Invalid data. Please check all fields.');
+      } else if (error.response?.status === 500) {
+        setError('Server error. Please try again later.');
+      } else {
+        setError(error.response?.data?.message || 'Failed to create note. Please try again.');
+      }
     }
   };
 
