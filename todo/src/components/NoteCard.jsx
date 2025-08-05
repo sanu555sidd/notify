@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Heart, Smile, Frown, Heart as HeartIcon, Zap, ThumbsUp, Meh } from 'lucide-react';
+import { API_BASE_URL } from '../config/api';
 
 function NoteCard({ note, onUpdate, onDelete, onLike }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -45,7 +46,7 @@ function NoteCard({ note, onUpdate, onDelete, onLike }) {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-      const res = await axios.put(`/api/notes/${note._id}`, { title, content, category }, { headers: { Authorization: `Bearer ${token}` } });
+      const res = await axios.put(`${API_BASE_URL}/notes/${note._id}`, { title, content, category }, { headers: { Authorization: `Bearer ${token}` } });
       onUpdate(res.data);
       setIsEditing(false);
     } catch (error) {
@@ -58,7 +59,7 @@ function NoteCard({ note, onUpdate, onDelete, onLike }) {
     if (!confirmed) return;
     try {
       const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-      await axios.delete(`/api/notes/${note._id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`${API_BASE_URL}/notes/${note._id}`, { headers: { Authorization: `Bearer ${token}` } });
       onDelete(note._id);
     } catch (error) {
       console.error(error);
@@ -74,7 +75,7 @@ function NoteCard({ note, onUpdate, onDelete, onLike }) {
   const handleLike = async () => {
     try {
       const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-      const response = await axios.post(`/api/notes/${note._id}/like`, {}, { 
+      const response = await axios.post(`${API_BASE_URL}/notes/${note._id}/like`, {}, { 
         headers: { Authorization: `Bearer ${token}` } 
       });
       

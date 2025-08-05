@@ -2,6 +2,7 @@
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from './config/api';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -21,7 +22,7 @@ function App() {
       const token = localStorage.getItem('token') || sessionStorage.getItem('token');
       if (token) {
         try {
-          const res = await axios.get('/api/auth/me', { headers: { Authorization: `Bearer ${token}` } });
+          const res = await axios.get(`${API_BASE_URL}/auth/me`, { headers: { Authorization: `Bearer ${token}` } });
           setUser(res.data);
         } catch (error) {
           localStorage.removeItem('token');

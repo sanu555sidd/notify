@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../config/api';
 
 function Profile({ user, setUser }) {
   const [name, setName] = useState(user.name);
@@ -13,7 +14,7 @@ function Profile({ user, setUser }) {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.put('/api/auth/profile', 
+      const res = await axios.put(`${API_BASE_URL}/auth/profile`, 
         { name, email },
         { headers: { Authorization: `Bearer ${token}` } }
       );

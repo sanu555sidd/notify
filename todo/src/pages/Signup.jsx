@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { User, Mail, Lock, Eye, EyeOff, ArrowLeft, UserPlus, AlertCircle, CheckCircle } from 'lucide-react';
+import { API_BASE_URL } from '../config/api';
 
 function Signup({ setUser }) {
   const [name, setName] = useState('');
@@ -51,7 +52,7 @@ function Signup({ setUser }) {
     setError('');
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/signup', { name, email, password }, {
+      const res = await axios.post(`${API_BASE_URL}/auth/signup`, { name, email, password }, {
         headers: { 'Content-Type': 'application/json' }
       });
       localStorage.setItem('token', res.data.token);

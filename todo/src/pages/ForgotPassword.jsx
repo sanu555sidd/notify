@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../config/api';
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
@@ -10,7 +11,7 @@ function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/api/auth/forgot-password', { email });
+      const res = await axios.post(`${API_BASE_URL}/auth/forgot-password`, { email });
       setMessage(`Password reset link sent. Use this token: ${res.data.token}`);
       setError('');
     } catch (error) {

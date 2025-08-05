@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import NoteCard from '../components/NoteCard';
 import NoteForm from '../components/NoteForm';
+import { API_BASE_URL } from '../config/api';
 
 function MyNotes({ user }) {
   const [notes, setNotes] = useState([]);
@@ -32,7 +33,7 @@ function MyNotes({ user }) {
     try {
       setIsSearching(true);
       const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-      const url = query ? `/api/notes/search?query=${encodeURIComponent(query)}` : '/api/notes';
+      const url = query ? `${API_BASE_URL}/notes/search?query=${encodeURIComponent(query)}` : `${API_BASE_URL}/notes`;
       const res = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
       setNotes(Array.isArray(res.data) ? res.data : []);
     } catch (error) {

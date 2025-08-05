@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import NoteCard from '../components/NoteCard';
+import { API_BASE_URL } from '../config/api';
 
 function LikedNotes({ user }) {
   const [likedNotes, setLikedNotes] = useState([]);
@@ -13,7 +14,7 @@ function LikedNotes({ user }) {
   const fetchLikedNotes = async () => {
     try {
       const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-      const res = await axios.get('/api/notes/liked', { headers: { Authorization: `Bearer ${token}` } });
+      const res = await axios.get(`${API_BASE_URL}/notes/liked`, { headers: { Authorization: `Bearer ${token}` } });
       setLikedNotes(Array.isArray(res.data) ? res.data : []);
     } catch (error) {
       console.error(error);
