@@ -187,8 +187,8 @@ function MyNotes({ user }) {
   const moodStats = getMoodStats();
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <h2 className="text-4xl font-light text-gray-700 mb-6">Welcome Back {user.name}...</h2>
+  <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6">
+  <h2 className="text-4xl font-light text-gray-700 dark:text-gray-100 mb-6">Welcome Back {user.name}...</h2>
       
       {/* Search Bar */}
       <div className="mb-6">
@@ -199,7 +199,7 @@ function MyNotes({ user }) {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search notes by title, content, or category..."
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
             {isSearching && (
               <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
@@ -210,28 +210,28 @@ function MyNotes({ user }) {
           <button 
             type="button"
             onClick={() => setSearchQuery('')}
-            className="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition duration-200"
+            className="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 transition duration-200"
           >
             Clear
           </button>
         </div>
         {searchQuery && (
-          <p className="text-sm text-gray-600 mt-2">
+          <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
             {isSearching ? 'Searching...' : `Found ${notes.length} note${notes.length !== 1 ? 's' : ''} matching "${searchQuery}"`}
           </p>
         )}
       </div>
 
       <div className="mb-6">
-        <button onClick={() => setShowForm(!showForm)} className="bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition duration-200">
+  <button onClick={() => setShowForm(!showForm)} className="bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 transition duration-200">
           Create New Note
         </button>
       </div>
 
       {/* Mood Dashboard */}
       {notes.length > 0 && Object.keys(moodStats).length > 0 && (
-        <div className="mb-6 bg-white p-4 rounded-lg shadow">
-          <h3 className="text-lg font-semibold text-gray-700 mb-3">📊 Your Mood Overview</h3>
+        <div className="mb-6 bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+          <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-100 mb-3">📊 Your Mood Overview</h3>
           <div className="flex flex-wrap gap-3">
             {Object.entries(moodStats).map(([mood, count]) => {
               const getMoodEmoji = (mood) => {
@@ -248,10 +248,10 @@ function MyNotes({ user }) {
               };
               
               return (
-                <div key={mood} className="flex items-center space-x-2 bg-gray-50 px-3 py-2 rounded-full">
+                <div key={mood} className="flex items-center space-x-2 bg-gray-50 dark:bg-gray-700 px-3 py-2 rounded-full">
                   <span className="text-lg">{getMoodEmoji(mood)}</span>
-                  <span className="text-sm font-medium text-gray-700 capitalize">{mood}</span>
-                  <span className="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded-full">{count}</span>
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-100 capitalize">{mood}</span>
+                  <span className="text-sm bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded-full">{count}</span>
                 </div>
               );
             })}
@@ -271,7 +271,7 @@ function MyNotes({ user }) {
             />
           ))
         ) : (
-          <p className="text-gray-500">No notes available.</p>
+          <p className="text-gray-500 dark:text-gray-400">No notes available.</p>
         )}
       </div>
     </div>

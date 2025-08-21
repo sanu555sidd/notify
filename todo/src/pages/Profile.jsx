@@ -28,8 +28,8 @@ function Profile({ user, setUser }) {
   };
 
   return (
-    <div className="container mx-auto mt-10 max-w-md">
-      <h2 className="text-2xl font-bold mb-6 text-center">My Profile</h2>
+    <div className="container mx-auto mt-10 max-w-md bg-white dark:bg-gray-900 p-8 rounded shadow">
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100">My Profile</h2>
       {message && <p className="text-green-500 mb-4">{message}</p>}
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -37,7 +37,7 @@ function Profile({ user, setUser }) {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
           placeholder="Name"
           required
         />
@@ -45,11 +45,11 @@ function Profile({ user, setUser }) {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
           placeholder="Email"
           required
         />
-        <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
+        <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800">
           Save Changes
         </button>
       </form>

@@ -66,7 +66,7 @@ function Signup({ setUser }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden flex items-center justify-center p-6">
+  <div className="min-h-screen bg-gradient-to-br from-white via-gray-100 to-white dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 relative overflow-hidden flex items-center justify-center p-6">
       {/* Animated background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -77,7 +77,7 @@ function Signup({ setUser }) {
       {/* Back button */}
       <button
         onClick={() => window.history.back()}
-        className="absolute top-6 left-6 z-20 flex items-center space-x-2 text-gray-300 hover:text-white transition-colors group"
+        className="absolute top-6 left-6 z-20 flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors group"
       >
         <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
         <span>Back</span>
@@ -85,14 +85,14 @@ function Signup({ setUser }) {
 
       {/* Main form container */}
       <div className="relative z-10 w-full max-w-md">
-        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl">
+  <div className="bg-white/80 dark:bg-white/10 backdrop-blur-xl border border-gray-200 dark:border-white/20 rounded-3xl p-8 shadow-2xl">
           {/* Header */}
           <div className="text-center mb-8">
             <div className="bg-gradient-to-r from-purple-400 to-pink-400 p-3 rounded-2xl w-fit mx-auto mb-4">
-              <UserPlus className="w-8 h-8 text-white" />
+              <UserPlus className="w-8 h-8 text-gray-800 dark:text-white" />
             </div>
-            <h2 className="text-3xl font-bold text-white mb-2">Create Account</h2>
-            <p className="text-gray-300">Join thousands of users who trust Note Zipper</p>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Create Account</h2>
+            <p className="text-gray-700 dark:text-gray-300">Join thousands of users who trust Note Zipper</p>
           </div>
 
           {/* Error message */}
@@ -107,14 +107,14 @@ function Signup({ setUser }) {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Name field */}
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Full Name</label>
               <div className="relative">
                 <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                  className="w-full bg-white/50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl py-3 px-10 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                   placeholder="Enter your full name"
                   required
                 />
@@ -123,14 +123,14 @@ function Signup({ setUser }) {
 
             {/* Email field */}
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                  className="w-full bg-white/50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl py-3 px-10 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                   placeholder="Enter your email"
                   required
                 />
@@ -139,14 +139,14 @@ function Signup({ setUser }) {
 
             {/* Password field */}
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Password</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={handlePasswordChange}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-10 pr-12 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                  className="w-full bg-white/50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl py-3 px-10 pr-12 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                   placeholder="Create a strong password"
                   required
                 />
@@ -163,10 +163,10 @@ function Signup({ setUser }) {
               {password && (
                 <div className="mt-3">
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-xs text-gray-400">Password Strength</span>
-                    <span className="text-xs text-gray-300">{getStrengthText()}</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">Password Strength</span>
+                    <span className="text-xs text-gray-700 dark:text-gray-300">{getStrengthText()}</span>
                   </div>
-                  <div className="w-full bg-gray-700 rounded-full h-2">
+                  <div className="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-2">
                     <div 
                       className={`h-2 rounded-full transition-all duration-300 ${getStrengthColor()}`}
                       style={{ width: `${(passwordStrength / 5) * 100}%` }}
@@ -180,7 +180,7 @@ function Signup({ setUser }) {
             <button 
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-semibold py-3 rounded-xl transition-all duration-300 transform hover:scale-[1.02] disabled:scale-100 flex items-center justify-center space-x-2"
+              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-gray-400 dark:disabled:from-gray-600 disabled:to-gray-300 dark:disabled:to-gray-700 text-white font-semibold py-3 rounded-xl transition-all duration-300 transform hover:scale-[1.02] disabled:scale-100 flex items-center justify-center space-x-2"
             >
               {isLoading ? (
                 <>
@@ -198,11 +198,11 @@ function Signup({ setUser }) {
 
           {/* Login link */}
           <div className="mt-8 text-center">
-            <p className="text-gray-300">
+            <p className="text-gray-700 dark:text-gray-300">
               Already have an account?{' '}
               <button 
                 onClick={() => navigate('/login')}
-                className="text-purple-400 hover:text-purple-300 font-medium transition-colors"
+                className="text-purple-700 dark:text-purple-400 hover:text-purple-900 dark:hover:text-purple-300 font-medium transition-colors"
               >
                 Sign In
               </button>
@@ -211,11 +211,11 @@ function Signup({ setUser }) {
 
           {/* Terms */}
           <div className="mt-6 text-center">
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-gray-500 dark:text-gray-400">
               By creating an account, you agree to our{' '}
-              <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors">Terms of Service</a>
+              <a href="#" className="text-purple-700 dark:text-purple-400 hover:text-purple-900 dark:hover:text-purple-300 transition-colors">Terms of Service</a>
               {' '}and{' '}
-              <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors">Privacy Policy</a>
+              <a href="#" className="text-purple-700 dark:text-purple-400 hover:text-purple-900 dark:hover:text-purple-300 transition-colors">Privacy Policy</a>
             </p>
           </div>
         </div>

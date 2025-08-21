@@ -12,6 +12,7 @@ import MyNotes from './pages/MyNotes';
 import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
 import LikedNotes from './pages/LikedNotes';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -36,19 +37,21 @@ function App() {
   const showNavbar = location.pathname !== '/';
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      {showNavbar && <Navbar user={user} setUser={setUser} />}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={user ? <Navigate to="/mynotes" /> : <Login setUser={setUser} />} />
-        <Route path="/signup" element={user ? <Navigate to="/mynotes" /> : <Signup setUser={setUser} />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/mynotes" element={user ? <MyNotes user={user} /> : <Navigate to="/login" />} />
-        <Route path="/profile" element={user ? <Profile user={user} setUser={setUser} /> : <Navigate to="/login" />} />
-        <Route path="/liked-notes" element={user ? <LikedNotes user={user} /> : <Navigate to="/login" />} />
-      </Routes>
-    </div>
+    <ThemeProvider>
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+        {showNavbar && <Navbar user={user} setUser={setUser} />}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={user ? <Navigate to="/mynotes" /> : <Login setUser={setUser} />} />
+          <Route path="/signup" element={user ? <Navigate to="/mynotes" /> : <Signup setUser={setUser} />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/mynotes" element={user ? <MyNotes user={user} /> : <Navigate to="/login" />} />
+          <Route path="/profile" element={user ? <Profile user={user} setUser={setUser} /> : <Navigate to="/login" />} />
+          <Route path="/liked-notes" element={user ? <LikedNotes user={user} /> : <Navigate to="/login" />} />
+        </Routes>
+      </div>
+    </ThemeProvider>
   );
 }
 

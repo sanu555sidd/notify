@@ -45,7 +45,7 @@ function Login({ setUser }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden flex items-center justify-center p-6">
+  <div className="min-h-screen bg-gradient-to-br from-white via-gray-100 to-white dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 relative overflow-hidden flex items-center justify-center p-6">
       {/* Animated background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -56,7 +56,7 @@ function Login({ setUser }) {
       {/* Back button */}
       <button
         onClick={() => window.history.back()}
-        className="absolute top-6 left-6 z-20 flex items-center space-x-2 text-gray-300 hover:text-white transition-colors group"
+        className="absolute top-6 left-6 z-20 flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors group"
       >
         <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
         <span>Back</span>
@@ -64,14 +64,14 @@ function Login({ setUser }) {
 
       {/* Main form container */}
       <div className="relative z-10 w-full max-w-md">
-        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl">
+        <div className="bg-white/80 dark:bg-white/10 backdrop-blur-xl border border-gray-200 dark:border-white/20 rounded-3xl p-8 shadow-2xl">
           {/* Header */}
           <div className="text-center mb-8">
             <div className="bg-gradient-to-r from-blue-400 to-cyan-400 p-3 rounded-2xl w-fit mx-auto mb-4">
-              <LogIn className="w-8 h-8 text-white" />
+              <LogIn className="w-8 h-8 text-gray-800 dark:text-white" />
             </div>
-            <h2 className="text-3xl font-bold text-white mb-2">Welcome Back</h2>
-            <p className="text-gray-300">Sign in to access your notes</p>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Welcome Back</h2>
+            <p className="text-gray-700 dark:text-gray-300">Sign in to access your notes</p>
           </div>
 
           {/* Error message */}
@@ -86,7 +86,7 @@ function Login({ setUser }) {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email field */}
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
@@ -94,7 +94,7 @@ function Login({ setUser }) {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="w-full bg-white/50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl py-3 px-10 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   placeholder="Enter your email"
                   required
                 />
@@ -104,7 +104,7 @@ function Login({ setUser }) {
 
             {/* Password field */}
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Password</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
@@ -112,7 +112,7 @@ function Login({ setUser }) {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-10 pr-12 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="w-full bg-white/50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl py-3 px-10 pr-12 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   placeholder="Enter your password"
                   required
                 />
@@ -135,11 +135,11 @@ function Login({ setUser }) {
                   onChange={(e) => setRememberMe(e.target.checked)}
                   className="w-4 h-4 text-blue-600 bg-white/5 border border-white/20 rounded focus:ring-blue-500 focus:ring-2"
                 />
-                <span className="text-sm text-gray-300">Remember me</span>
+                <span className="text-sm text-gray-700 dark:text-gray-300">Remember me</span>
               </label>
               <button 
                 onClick={() => navigate('/forgot-password')}
-                className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
               >
                 Forgot Password?
               </button>
@@ -149,7 +149,7 @@ function Login({ setUser }) {
             <button 
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-semibold py-3 rounded-xl transition-all duration-300 transform hover:scale-[1.02] disabled:scale-100 flex items-center justify-center space-x-2"
+              className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 disabled:from-gray-400 dark:disabled:from-gray-600 disabled:to-gray-300 dark:disabled:to-gray-700 text-white font-semibold py-3 rounded-xl transition-all duration-300 transform hover:scale-[1.02] disabled:scale-100 flex items-center justify-center space-x-2"
             >
               {isLoading ? (
                 <>
@@ -167,21 +167,21 @@ function Login({ setUser }) {
 
           {/* Divider */}
           <div className="my-8 flex items-center">
-            <div className="flex-1 border-t border-white/20"></div>
+            <div className="flex-1 border-t border-gray-200 dark:border-white/20"></div>
             <span className="px-4 text-gray-400 text-sm">or</span>
-            <div className="flex-1 border-t border-white/20"></div>
+            <div className="flex-1 border-t border-gray-200 dark:border-white/20"></div>
           </div>
 
           {/* Social login buttons */}
           <div className="space-y-3">
-            <button className="w-full bg-white/5 hover:bg-white/10 border border-white/10 text-white py-3 rounded-xl transition-all duration-300 flex items-center justify-center space-x-3">
+            <button className="w-full bg-white/70 dark:bg-white/5 hover:bg-white/90 dark:hover:bg-white/10 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white py-3 rounded-xl transition-all duration-300 flex items-center justify-center space-x-3">
               <div className="w-5 h-5 bg-white rounded-sm flex items-center justify-center">
                 <span className="text-xs font-bold text-black">G</span>
               </div>
               <span>Continue with Google</span>
             </button>
             
-            <button className="w-full bg-white/5 hover:bg-white/10 border border-white/10 text-white py-3 rounded-xl transition-all duration-300 flex items-center justify-center space-x-3">
+            <button className="w-full bg-black/10 dark:bg-white/5 hover:bg-black/20 dark:hover:bg-white/10 border border-gray-300 dark:border-white/10 text-gray-900 dark:text-white py-3 rounded-xl transition-all duration-300 flex items-center justify-center space-x-3">
               <div className="w-5 h-5 bg-black rounded-sm flex items-center justify-center">
                 <span className="text-xs font-bold text-white">f</span>
               </div>
@@ -191,11 +191,11 @@ function Login({ setUser }) {
 
           {/* Signup link */}
           <div className="mt-8 text-center">
-            <p className="text-gray-300">
+            <p className="text-gray-700 dark:text-gray-300">
               Don't have an account?{' '}
               <button 
                 onClick={() => navigate('/signup')}
-                className="text-blue-400 hover:text-blue-300 font-medium transition-colors inline-flex items-center space-x-1"
+                className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors inline-flex items-center space-x-1"
               >
                 <span>Create Account</span>
                 <UserPlus className="w-4 h-4" />
@@ -205,7 +205,7 @@ function Login({ setUser }) {
 
           {/* Security notice */}
           <div className="mt-6 text-center">
-            <div className="flex items-center justify-center space-x-2 text-xs text-gray-400">
+            <div className="flex items-center justify-center space-x-2 text-xs text-gray-500 dark:text-gray-400">
               <KeyRound className="w-4 h-4" />
               <span>Your data is secured with end-to-end encryption</span>
             </div>

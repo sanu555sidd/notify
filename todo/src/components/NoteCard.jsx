@@ -96,10 +96,10 @@ function NoteCard({ note, onUpdate, onDelete, onLike }) {
   const moodDisplay = getMoodDisplay(note.sentiment);
 
   return (
-    <div className="bg-white p-4 rounded shadow border border-gray-200">
+  <div className="bg-white dark:bg-gray-800 p-4 rounded shadow border border-gray-200 dark:border-gray-700">
       <div className="cursor-pointer flex justify-between items-center" onClick={() => setIsExpanded(!isExpanded)}>
         <div className="flex items-center space-x-3">
-          <h3 className="text-lg font-semibold text-gray-800">{note.title}</h3>
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">{note.title}</h3>
           {/* Mood indicator */}
           {note.sentiment && (
             <div className={`flex items-center space-x-1 px-2 py-1 rounded-full ${moodDisplay.bg}`}>
@@ -113,7 +113,7 @@ function NoteCard({ note, onUpdate, onDelete, onLike }) {
           )}
         </div>
         <div className="space-x-2">
-          <button onClick={(e) => { e.stopPropagation(); setIsEditing(true); }} className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600 transition duration-200">
+          <button onClick={(e) => { e.stopPropagation(); setIsEditing(true); setIsExpanded(true); }} className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600 transition duration-200">
             Edit
           </button>
           <button onClick={(e) => { e.stopPropagation(); handleDelete(); }} className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition duration-200">
@@ -128,12 +128,12 @@ function NoteCard({ note, onUpdate, onDelete, onLike }) {
         </div>
       </div>
       {isExpanded && (
-        <div className="mt-2 text-gray-600">
+  <div className="mt-2 text-gray-600 dark:text-gray-300">
           {isEditing ? (
             <form onSubmit={handleUpdate} className="space-y-2">
-              <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="w-full p-2 border rounded" placeholder="Title" />
-              <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} className="w-full p-2 border rounded" placeholder="Category" />
-              <textarea value={content} onChange={(e) => setContent(e.target.value)} className="w-full p-2 border rounded" placeholder="Content" />
+              <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="w-full p-2 border rounded bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100" placeholder="Title" />
+              <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} className="w-full p-2 border rounded bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100" placeholder="Category" />
+              <textarea value={content} onChange={(e) => setContent(e.target.value)} className="w-full p-2 border rounded bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100" placeholder="Content" />
               <div className="flex space-x-2">
                 <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Save</button>
                 <button type="button" onClick={() => setIsEditing(false)} className="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
@@ -144,8 +144,8 @@ function NoteCard({ note, onUpdate, onDelete, onLike }) {
               <div className="flex items-center space-x-2 mb-2">
                 <span className="bg-green-500 text-white text-sm py-1 px-2 rounded">Category: {note.category}</span>
               </div>
-              <p className="text-gray-700">{note.content}</p>
-              <p className="text-sm text-gray-500 mt-1">- Created On: {new Date(note.createdAt).toLocaleDateString()}</p>
+              <p className="text-gray-700 dark:text-gray-200">{note.content}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">- Created On: {new Date(note.createdAt).toLocaleDateString()}</p>
             </>
           )}
         </div>

@@ -37,8 +37,8 @@ function LikedNotes({ user }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <h2 className="text-4xl font-light text-gray-700 mb-6">Liked Notes</h2>
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6">
+      <h2 className="text-3xl font-light text-gray-700 dark:text-gray-100 mb-6">Liked Notes</h2>
       <div className="space-y-4">
         {likedNotes.length > 0 ? (
           likedNotes.map(note => (
@@ -51,7 +51,7 @@ function LikedNotes({ user }) {
             />
           ))
         ) : (
-          <p className="text-gray-500">No liked notes available.</p>
+          <p className="text-gray-500 dark:text-gray-400">No liked notes yet.</p>
         )}
       </div>
     </div>
