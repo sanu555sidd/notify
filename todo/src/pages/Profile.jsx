@@ -12,17 +12,33 @@ function Profile({ user, setUser }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    if (!token) {
+      setError('Session expired. Please log in again.');
+      setTimeout(() => {
+        navigate('/login');
+      }, 1500);
+      return;
+    }
     try {
-      const token = localStorage.getItem('token');
-      const res = await axios.put(`${API_BASE_URL}/auth/profile`, 
+      await axios.put(`${API_BASE_URL}/auth/profile`, 
         { name, email },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setUser(res.data.user);
+      // Fetch the latest user data
+      const res = await axios.get(`${API_BASE_URL}/auth/me`, { headers: { Authorization: `Bearer ${token}` } });
+      setUser(res.data);
       setMessage('Profile updated successfully');
       setError('');
     } catch (error) {
-      setError(error.response?.data?.message || 'An error occurred');
+      if (error.response?.status === 401) {
+        setError('Session expired. Please log in again.');
+        setTimeout(() => {
+          navigate('/login');
+        }, 1500);
+      } else {
+        setError(error.response?.data?.message || 'An error occurred');
+      }
       setMessage('');
     }
   };
