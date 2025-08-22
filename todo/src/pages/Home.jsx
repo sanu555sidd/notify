@@ -1,5 +1,5 @@
 import { FileText, Shield, Zap, Users, ArrowRight, Star } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Home() {
   const navigate = useNavigate();
@@ -22,8 +22,8 @@ function Home() {
             <span className="font-bold text-xl text-gray-900 dark:text-white">Notify</span>
           </div>
           <div className="hidden md:flex space-x-8 text-gray-700 dark:text-gray-300">
-            <a href="#features" className="hover:text-gray-900 dark:hover:text-white transition-colors">Features</a>
-            <a href="#about" className="hover:text-gray-900 dark:hover:text-white transition-colors">About</a>
+            <Link to="/features" className="hover:text-gray-900 dark:hover:text-white transition-colors">Features</Link>
+            <Link to="/about" className="hover:text-gray-900 dark:hover:text-white transition-colors">About</Link>
             <a href="#contact" className="hover:text-gray-900 dark:hover:text-white transition-colors">Contact</a>
           </div>
         </div>
@@ -66,6 +66,17 @@ function Home() {
               className="bg-black/10 dark:bg-white/10 backdrop-blur-sm border border-black/20 dark:border-white/20 hover:bg-black/20 dark:hover:bg-white/20 text-gray-900 dark:text-white font-semibold py-4 px-8 rounded-2xl transition-all duration-300 hover:scale-105"
             >
               Sign In
+            </button>
+          </div>
+
+          {/* Learn More Button */}
+          <div className="mb-16">
+            <button
+              onClick={() => navigate('/features')}
+              className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium flex items-center space-x-2 mx-auto transition-colors group"
+            >
+              <span>Explore All Features</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
 

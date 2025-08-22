@@ -10,6 +10,8 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import MyNotes from './pages/MyNotes';
 import Profile from './pages/Profile';
+import Features from './pages/Features';
+import About from './pages/About';
 import Navbar from './components/Navbar';
 import LikedNotes from './pages/LikedNotes';
 import { ThemeProvider } from './context/ThemeContext';
@@ -34,6 +36,7 @@ function App() {
     fetchUser();
   }, []);
 
+  // Show navbar on all pages except home page
   const showNavbar = location.pathname !== '/';
 
   return (
@@ -42,6 +45,8 @@ function App() {
         {showNavbar && <Navbar user={user} setUser={setUser} />}
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/features" element={<Features />} />
+          <Route path="/about" element={<About />} />
           <Route path="/login" element={user ? <Navigate to="/mynotes" /> : <Login setUser={setUser} />} />
           <Route path="/signup" element={user ? <Navigate to="/mynotes" /> : <Signup setUser={setUser} />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />

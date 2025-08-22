@@ -26,7 +26,7 @@ function Navbar({ user, setUser }) {
   }, []);
 
   return (
-    <nav className="bg-blue-600 dark:bg-gray-800 p-4 text-white flex justify-between items-center">
+    <nav className="bg-blue-600 dark:bg-gray-800 p-4 text-white flex justify-between items-center sticky top-0 z-50 shadow-lg">
       <div className="flex items-center space-x-4">
         <span className="text-xl font-bold cursor-pointer">NOTIFY</span>
 
@@ -46,6 +46,8 @@ function Navbar({ user, setUser }) {
 
       {user ? (
         <div className="flex items-center space-x-4">
+          <Link to="/features" className="hover:underline cursor-pointer">Features</Link>
+          <Link to="/about" className="hover:underline cursor-pointer">About</Link>
           <Link to="/liked-notes" className="hover:underline cursor-pointer">Liked Notes</Link>
           <Link to="/mynotes" className="hover:underline cursor-pointer">My Notes</Link>
 
@@ -80,6 +82,8 @@ function Navbar({ user, setUser }) {
         </div>
       ) : (
         <div className="space-x-4">
+          <Link to="/features" className="hover:underline cursor-pointer">Features</Link>
+          <Link to="/about" className="hover:underline cursor-pointer">About</Link>
           <Link to="/login" className="hover:underline cursor-pointer">Login</Link>
           <Link to="/signup" className="hover:underline cursor-pointer">Signup</Link>
         </div>
